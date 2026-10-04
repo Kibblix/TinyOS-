@@ -12,7 +12,7 @@
         o.textContent=f_+"\n"
 
         ac=new AudioContext
-        s=(x,t)=>setTimeout(()=>o.textContent+=x+"\n",t)
+        s=(x,t)=>setTimeout(()=>o.textContent+="--OK-- "+x+"\n",t)
         function beep(freq,time){
             let x=ac.createOscillator()
             let g=ac.createGain()
@@ -30,9 +30,9 @@
             document.body.style.background="black"
             document.body.innerHTML="<pre id=o></pre>"
 
-            s("--OK-- tinyd started",150)
-            s("--OK-- readying ksh and graphical userspace",300)
-            s("--OK-- starting TinyOS",1500)
+            s("tinyd started",150)
+            s("readying ksh and graphical userspace",300)
+            s("starting TinyOS",1500)
             setTimeout(()=>location.reload(),2200)
         }
 
@@ -84,11 +84,11 @@
                     setTimeout(() =>boot(), 3500)
                 }else if(t_=="reboot"){
                     
-                    s("--OK-- started system.target poweroff",0)
-                    s("--OK-- stopping services",100)
-                    s("--OK-- tinyd is running a stop job",400)
-                    s("--OK-- wiping tmpfs",600)
-                    s("--OK-- system.target poweroff reached after 1100ms",1000)
+                    s("started system.target poweroff",0)
+                    s("stopping services",100)
+                    s("tinyd is running a stop job",400)
+                    s("wiping tmpfs",600)
+                    s("system.target poweroff reached after 1100ms",1000)
                     setTimeout(()=>{
                         document.body.innerHTML="<pre id=o></pre>"
                     },1400)
