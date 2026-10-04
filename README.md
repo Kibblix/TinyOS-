@@ -11,7 +11,7 @@ Just take your built url (see the guide below) or the one located in the repo an
 then you can play around with all the commands and check out its functions
 since i was limited to only 3KB it doesnt have many commands but here is a list and what they do:
 - echo
-as you might expect if you are a unix or linux user it echoes evrything after it
+as you might expect if you are a unix or linux user it echoes everything after it
 - help
 displays all commands, except one secret command (read to the end to figure out what it is) :o
 - id
@@ -32,7 +32,7 @@ package manager! that depends on nmctl
 clears the screen
 - shutdown
 "shuts down" the terminal
-> i sadly found no way to create or modify files withing the restraints i had been given so everything is hard coded :(
+> i sadly found no way to create or modify files within the restraints i had been given so everything is hard coded :(
 
 **How do i build it?**
 
@@ -45,5 +45,5 @@ then go into the cloned directory
 `cd TinyOS-/`
 
 Then you can build the script with by running `node build.mjs` and the built uri should be located within the dist/ directory.
-Then just paste the uri into your preffered web browser (real ones use firefox :>) and start fooling around with it
+Then just paste the uri into your preferred web browser (real ones use firefox :>) and start fooling around with it
 
