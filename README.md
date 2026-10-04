@@ -1,7 +1,7 @@
 ## TinyOS
 **Description**
-This is my project for shrink
-it is a 3kb "terminal emulator", it runs completely standalone with a uri and is usable (to some extent)
+This is my project for shrink.
+it is a 3kb "terminal emulator", it runs completely standalone with a uri and is usable (to some extent) and
 It has a few commands and a cool fetch!
 
 **How to use it**
