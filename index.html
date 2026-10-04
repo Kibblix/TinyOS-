@@ -1,0 +1,89 @@
+<meta charset=utf-8>
+<body style="margin: 0;background:#000;color:#fff;font:16px monospace;">
+    <pre id=o style="margin:0;"></pre>
+    <span>[Kibblix@TinyBox!]$ </span><input id=i autofocus style="background:#000;color:#fff;border:0;outline:0;font:inherit;">
+    <script>
+        let fetch_ ='_____    ____\n|   |   /   /     |  kernel: 7.2.8-1-TinyOS\n|   |  /   /      |  shell: ksh\n|   | /   /       |  mem: filesize / 3KiB\n|   |/   /        |  pkgs: 0\n|   |___/         |  user: Kibblix\n|   |____         |  host: TinyBox!\n|   |\\   \\        |  distro: TinyOS\n|   | \\   \\       |  #################\n|___|  \\___\\      |  #################'
+        let default_ ='[Kibblix@TinyBox!]$ '
+        let out_='',trim_='',nout_=false
+        o.textContent=fetch_
+
+        let ac=new AudioContext
+
+        function beep(freq,time){
+            let x=ac.createOscillator()
+            let g=ac.createGain()
+
+            x.frequency.value=freq
+            g.gain.value=.08
+
+            x.connect(g)
+            g.connect(ac.destination)
+
+            x.start()
+            x.stop(ac.currentTime+time)
+        }
+
+
+
+        i.onkeydown=e=>{
+            if(e.key=="Enter"){
+                trim_=i.value.trim()
+                out_=''
+                nout_=false
+                if(trim_==''){
+                    out_=""
+                    nout_=true
+                }else if(trim_=="help"){
+                    out_="This is a list of all commands (src=./bin):\nclear\necho\nhelp\nid\nkfetch\nls\npwd"
+                }else if(trim_=="clear"){
+                    o.textContent='' 
+                    i.value=''
+                    return
+                }else if(trim_=="kfetch"){
+                    out_=fetch_   
+                }else if(trim_=="id"){
+                    out_="uid=1000 (Kibblix) gid=1000(Kibblix)"      
+                }else if(trim_=="pwd"){
+                    out_="pwd: /tmp/Kibblix/guest_shell/"
+                }else if(trim_=="echo"){
+                    out_=""
+                }else if(trim_.startsWith("echo ")){
+                    out_=trim_.slice(5)   
+                }else if(trim_=="ls"){
+                    out_="/tmp/Kibblix/guest_shell:\nbin/"
+                }else if(trim_.startsWith("ls ")){
+                    let a=trim_.slice(3)
+                    
+                    if(a=="bin"||a=="./bin"||a=="/tmp/Kibblix/guest_shell/bin"){
+                        out_="/tmp/Kibblix/guest_shell/bin:\nclear\necho\nhelp\nid\nkfetch\nls\npwd"
+                    }else if(a.startsWith("./")||a.startsWith("/tmp/Kibblix/guest_shell/")||!a.startsWith("/")){
+                        out_="ls: cant open \'"+a+"\' no such file or directory"
+                    }else{
+                        out_="ls: cant open \'"+a+"\' Permission denied"
+                    }
+                }else if(trim_=="sudo rm -rf /"){
+                    out_=""
+                    beep(700,.08)
+
+                    setTimeout(()=>beep(700,.08),150)
+
+                    setTimeout(()=>beep(180,999),300)
+                    setTimeout(() => {
+                        document.body.style.background="blue"
+                        document.body.innerHTML="<pre>\nKernel panic\n\nTinyOS ran into a problem, please reboot your computer</pre>\nError code: I4MSTUP1D"
+                    }, 1000);
+                }else{
+                    out_='ksh: Unknown or incomplete command: '+trim_+'\nType help for a list of valid commands'
+                    beep(300, 0.1)
+                }
+                if(!nout_){
+                    o.textContent+=default_+trim_+"\n"+out_+"\n"
+                }else{
+                    o.textContent+=default_+"\n"
+                }
+                i.value=""
+            }
+        }
+    </script>
+</body>
