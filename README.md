@@ -37,6 +37,6 @@ first clone the repo by running this command
 - git clone https://github.com/kibblix/TinyOS-
 then go into the cloned directory
 - cd TinyOS-/
-Then you can build the script with by running `node build.mjs` and the built uri should be located within the dist/ directory
--# Make sure you have node installed
-Then just paste the uri into your preffered web browser (real ones use firefox :>)
+Then you can build the script with by running `node build.mjs` and the built uri should be located within the dist/ directory.
+Then just paste the uri into your preffered web browser (real ones use firefox :>) and start fooling around with it
+
