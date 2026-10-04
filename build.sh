@@ -31,7 +31,7 @@ print(f"out.txt:    {out_size} bytes")
 print(f"remaining:  {LIMIT-out_size} bytes")
 
 if out_size > LIMIT:
-    print("UH OH: over the 3072 byte limit :(")
+    print("over the 3072 byte limit :(")
 else:
-    print("SHRINK approved :3")
+    print("under the limit :)")
 PY
