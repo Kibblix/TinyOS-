@@ -4,7 +4,7 @@ This is my project for shrink.
 it is a 3kb "terminal emulator", it runs completely standalone with a uri and is usable (to some extent) and
 It has a few commands and a cool fetch!
 
-**How to use it**
+**How to use it?**
 Just take your built url (see the guide below) or the one located in the repo and paste it in your browser, simple as that
 the you can play around with all the commands and check out its functions
 since i was limited to only 3KB it doesnt have many commands but here is a list and what they do:
