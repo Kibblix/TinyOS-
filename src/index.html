@@ -4,8 +4,8 @@
     <pre id=o style="margin:0;"></pre>
     <span>[Kibblix@TinyBox!]$ </span><input id=i autofocus style="background:#000;color:#fff;border:0;outline:0;font:inherit;">
     <script>
-        f_ ='_____    ____\n|   |   /   /     |  kernel: 7.2.8-1-TinyOS\n|   |  /   /      |  shell: ksh\n|   | /   /       |  mem: 3.0KB / 3KB\n|   |/   /        |  pkgs: 0\n|   |___/         |  user: Kibblix\n|   |___\\         |  host: TinyBox!\n|   |\\   \\        |  distro: TinyOS\n|   | \\   \\       |  ################\n|___|  \\___\\      |  ################'
-        d_ ='[Kibblix@TinyBox!]$ '
+        f_='_____    ____\n|   |   /   /     |  kernel: 7.2.8-1-TinyOS\n|   |  /   /      |  shell: ksh\n|   | /   /       |  mem: 3.0KB / 3KB\n|   |/   /        |  pkgs: 0\n|   |___/         |  user: Kibblix\n|   |___\\         |  host: TinyBox!\n|   |\\   \\        |  distro: TinyOS\n|   | \\   \\       |  ################\n|___|  \\___\\      |  ################'
+        d_='[Kibblix@TinyBox!]$ '
         o_='',t_=''
         c_=['echo','id','kfetch','ls','lsblk','pwd']
         r_=["","uid=1000 (Kibblix) gid=1000(Kibblix)",f_,"/tmp/Kibblix/sh:\nbin/","NAME         USED  AVAIL  MOUNT\ntmpfs\n |- tmpfs_1    3.0KB 0.3%    /tmp/Kibblix/sh/","pwd: /tmp/Kibblix/sh/"]
@@ -43,6 +43,7 @@
                 t_=i.value.trim()
                 o_=''
                 n=c_.indexOf(t_)
+                m_=t_
 
                 if(t_=="help"){
                     o_=c_.join("\n")+"\nclear\nreboot"
@@ -99,6 +100,8 @@
                 }
                 o.textContent+=d_+t_+"\n"+o_+"\n"
                 i.value=""
+            }else if(e.key=="ArrowUp"){
+                i.value=m_
             }
         }
     </script>
