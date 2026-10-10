@@ -4,14 +4,28 @@
     <pre id=o style="margin:0;"></pre>
     <span>[Kibblix@TinyBox!]$ </span><input id=i autofocus style="background:#000;color:#fff;border:0;outline:0;font:inherit;">
     <script>
+        //fetch
         f_='_____    ____\n|   |   /   /     |  kernel: 7.2.8-1-TinyOS\n|   |  /   /      |  shell: ksh\n|   | /   /       |  mem: 3.0KB / 3KB\n|   |/   /        |  pkgs: 0\n|   |___/         |  user: Kibblix\n|   |___\\         |  host: TinyBox!\n|   |\\   \\        |  distro: TinyOS\n|   | \\   \\       |  ################\n|___|  \\___\\      |  ################'
+        //default print before commands
         d_='[Kibblix@TinyBox!]$ '
-        o_='',t_=''
+        //history
+        h_=[]
+        //history index
+        h_i_=0
+        //output
+        o_=''
+        //trimmed command input
+        t_=''
+        //command list (these are only the hardcoded response commands)
         c_=['echo','id','kfetch','ls','lsblk','pwd']
+        //command list returns
         r_=["","uid=1000 (Kibblix) gid=1000(Kibblix)",f_,"/tmp/Kibblix/sh:\nbin/","NAME         USED  AVAIL  MOUNT\ntmpfs\n |- tmpfs_1    3.0KB 0.3%    /tmp/Kibblix/sh/","pwd: /tmp/Kibblix/sh/"]
+        //starts the website with a cool fetch on top
         o.textContent=f_+"\n"
 
+        //makes beep [insert thumbs up]
         ac=new AudioContext
+        //this is a bit saving version of set timeout the set output to something with OK in front
         s=(x,t)=>setTimeout(()=>o.textContent+="--OK-- "+x+"\n",t)
         function beep(freq,time){
             let x=ac.createOscillator()
@@ -26,6 +40,7 @@
             x.start()
             x.stop(ac.currentTime+time)
         }
+        //this is the "boot" screen
         function boot(){
             document.body.style.background="black"
             document.body.innerHTML="<pre id=o></pre>"
@@ -36,14 +51,19 @@
             setTimeout(()=>location.reload(),2200)
         }
 
-
-
+        //input handling
         i.onkeydown=e=>{
             if(e.key=="Enter"){
                 t_=i.value.trim()
                 o_=''
+                if (t_) {
+                    h_.push(t_)
+                    index = h_.length
+                }
+                
+                //if command is in the hardcoded list it makes it a return
                 n=c_.indexOf(t_)
-                m_=t_
+                
 
                 if(t_=="help"){
                     o_=c_.join("\n")+"\nclear\nreboot"
@@ -101,7 +121,17 @@
                 o.textContent+=d_+t_+"\n"+o_+"\n"
                 i.value=""
             }else if(e.key=="ArrowUp"){
-                i.value=m_
+                e.preventDefault()
+                if(h_i_>0){
+                    h_i_--
+                    i.value=h_[h_i_]
+                }
+            }else if(e.key=="ArrowDown"){
+                e.preventDefault()
+                if(h_i_<h_.length){
+                    h_i_++
+                    i.value=h_[h_i_] || ""
+                }
             }
         }
     </script>
