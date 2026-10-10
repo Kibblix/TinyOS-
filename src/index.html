@@ -7,8 +7,8 @@
         f_ ='_____    ____\n|   |   /   /     |  kernel: 7.2.8-1-TinyOS\n|   |  /   /      |  shell: ksh\n|   | /   /       |  mem: 3.0KB / 3KB\n|   |/   /        |  pkgs: 0\n|   |___/         |  user: Kibblix\n|   |___\\         |  host: TinyBox!\n|   |\\   \\        |  distro: TinyOS\n|   | \\   \\       |  ################\n|___|  \\___\\      |  ################'
         d_ ='[Kibblix@TinyBox!]$ '
         o_='',t_=''
-        c_=['echo','id','kfetch','ls','lsblk','pwd','nmctl']
-        r_=["","uid=1000 (Kibblix) gid=1000(Kibblix)",f_,"/tmp/Kibblix/sh:\nbin/","NAME           USED  AVAIL  MOUNT\ntmpfs\n |- tmpfs_1    3.0KB 0.3%    /tmp/Kibblix/sh/","pwd: /tmp/Kibblix/sh/","systemctl: networkmanager.service not found or broken\nupdate the package: tinypac nmctl"]
+        c_=['echo','id','kfetch','ls','lsblk','pwd']
+        r_=["","uid=1000 (Kibblix) gid=1000(Kibblix)",f_,"/tmp/Kibblix/sh:\nbin/","NAME         USED  AVAIL  MOUNT\ntmpfs\n |- tmpfs_1    3.0KB 0.3%    /tmp/Kibblix/sh/","pwd: /tmp/Kibblix/sh/"]
         o.textContent=f_+"\n"
 
         ac=new AudioContext
@@ -43,11 +43,9 @@
                 t_=i.value.trim()
                 o_=''
                 n=c_.indexOf(t_)
-                
-                
-                
+
                 if(t_=="help"){
-                    o_=c_.join("\n")+"\ntinypac\nclear\nreboot"
+                    o_=c_.join("\n")+"\nclear\nreboot"
                 }else if(t_==''){
                     o.textContent+=d_+"\n"
                     return
@@ -55,16 +53,13 @@
                     o.textContent='' 
                     i.value=''
                     return
-                }else if(t_.startsWith("tinypac ")){
-                    let a=t_.slice(8)
-                    o_="couldn't find/install package: '"+a+"' because a network connection was not found\nuse the nmctl tool to get connected"
                 }else if(t_.startsWith("echo ")){
                     o_=t_.slice(5)   
                 }else if(t_.startsWith("ls ")){
                     let a=t_.slice(3)
                     
                     if(a=="bin"||a=="./bin"||a=="/tmp/Kibblix/sh/bin"){
-                        o_=c_.join("\n")+"\ntinypac\nclear\nreboot"
+                        o_=c_.join("\n")+"\nclear\nreboot"
                     }else if(a=="/tmp/Kibblix/sh"){
                         o_="/tmp/Kibblix/sh:\nbin/"
                     }else{
